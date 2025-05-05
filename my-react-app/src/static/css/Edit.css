@@ -1,0 +1,15 @@
+.edit_wrapper{
+  width:100%;
+  height:100vh;
+  display:flex;
+}
+.edit_left{
+  width:50%;
+  height:100%;
+  background-color: aqua;
+}
+.edit_right{
+  width:50%;
+  height:100%;
+  background-color: aquamarine;
+}
