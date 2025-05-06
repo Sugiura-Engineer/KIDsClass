@@ -1,15 +1,43 @@
-.edit_wrapper{
+.edit-container{
   width:100%;
   height:100vh;
   display:flex;
 }
-.edit_left{
-  width:50%;
+/*/////////////////////*/
+/*左.*/
+.left-wrapper{
+  width: 60%;
   height:100%;
   background-color: aqua;
+  position:relative;
 }
-.edit_right{
-  width:50%;
+.left-display{
+  width: 90%;
+  height:90%;
+  background-color: brown;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+
+  overflow-y: scroll;
+}
+
+
+/*/////////////////////*/
+/*右.*/
+.right-wrapper{
+  width: 40%;
   height:100%;
   background-color: aquamarine;
+  position:relative;
+}
+.right-editer{
+  width: 90%;
+  height:90%;
+  background-color: forestgreen;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform: translate(-50%,-50%);
 }
