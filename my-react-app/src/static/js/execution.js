@@ -1,7 +1,10 @@
+// @ts-ignore
+import {classificationAlgorithm} from "../js/classificationAlgorithm.js"
+
 export function classificationExecution(file){
   if(!file){
   alert("ファイルが選択されていません");
   return;
   }
-  alert("クラス分けを行います");
+  classificationAlgorithm();
 };
