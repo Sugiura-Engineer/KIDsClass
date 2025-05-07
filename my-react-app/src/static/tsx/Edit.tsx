@@ -9,8 +9,9 @@ import {classificationAlgorithm} from "../js/classificationAlgorithm.js"
 import {useState} from "react";//状態を管理するというやつだが、つまりは監視対象を追加設定するようなもの.
 
 function Edit(){
-  const [selectedFile,setSelectedFile] = useState(null);
-  const [classNumber, classNumberCtr] = useState(0);
+  const [selectedFile, setSelectedFile] = useState(null);//ファイル保存.
+  const [tableData, setTableData] = useState([]);//クレンジング後のデータ.
+  const [classNumber, setClassNumber] = useState(0);//クラス数保存.
 
   return(
     <>
@@ -23,12 +24,12 @@ function Edit(){
         <div className="right-wrapper">
           <div className="right-editer">
             <form>
-              <input type="file" accept=".csv,.xls,.xlsx" onChange={(e) => getFile(e, setSelectedFile)}/>{/*ファイルが選択されたときに関数実行.eを受け取ってgetfileに渡す、という意味で、引数が２つあるときはこの書き方じゃないとダメ.自動だと一つだけなので.*/}
+              <input type="file" accept=".csv,.xls,.xlsx" onChange={(e) => {getFile(e, setSelectedFile, setTableData,tableData);}}/>{/*ファイルが選択されたときに関数実行.eを受け取ってgetfileに渡す、という意味で、引数が２つあるときはこの書き方じゃないとダメ.自動だと一つだけなので.*/}
             </form>
             <form>
-              <input type="number" min="0" value={classNumber} onChange={(e) => {classNumberCtr(Number(e.target.value)); classificationAlgorithm(e);}}></input>{/*状態を更新,引数として渡す.ここのNunberは数値に変換という意味,この状態だと文字列なので.*/ }
+              <input type="number" min="0" value={classNumber} onChange={(e) => {setClassNumber(Number(e.target.value));}}></input>{/*状態を更新,引数として渡す.ここのNunberは数値に変換という意味,この状態だと文字列なので.*/ }
             </form>
-            <button onClick={() => classificationExecution(selectedFile)}>クラス分けを実行</button>{/*onClick={関数()}だと即時実行、onClick={()=>関数()}だとクリックしたときに実行.*/}
+            <button onClick={() => classificationExecution(selectedFile,classNumber,tableData)}>クラス分けを実行</button>{/*onClick={関数()}だと即時実行、onClick={()=>関数()}だとクリックしたときに実行.*/}
 
           </div>
         </div>
@@ -36,5 +37,7 @@ function Edit(){
     </>
   )
 }
+
+
 
 export default Edit
