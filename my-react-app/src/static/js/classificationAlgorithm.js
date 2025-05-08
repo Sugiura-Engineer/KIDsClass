@@ -6,7 +6,8 @@
 export function classificationAlgorithm(classNumber,tableData){
 //クラスの数だけクラスリストを作成.
   const classList = createClass(classNumber);
-  console.log(classList);
+  const stuPerClass = Math.ceil(tableData.length/classNumber);
+  console.log(stuPerClass);
 
 //ピアノを弾ける人を抽出して分ける.
   let t_piano = tableData.filter(row => row["ピアノ"] === "可");
@@ -28,11 +29,29 @@ export function classificationAlgorithm(classNumber,tableData){
 
 //いったん実行
   //クラス作って、必要なのを振り分けて、平均になるように分ける
-  
+  t_piano.forEach((student,index) =>{
+    const targetClassIndex = index % classNumber;         //余りを求める.classNumberは変わらないので、数字が循環する.
+    classList[targetClassIndex].members.push(student);
+  })
+  //家庭対応を分ける.
+  t_fam.forEach((student,index) => {
+    const targetClassIndex= index % classNumber;
+    classList[targetClassIndex].members.push(student);
+  })
+  //性別を均等にする.
+  rest_boy.forEach((student,index) =>{
+    const targetClassIndex = index % classNumber;
+    classList[targetClassIndex].members.push(student);
+  });
+  rest_girl.forEach((student,index) =>{
+    const targetClassIndex = index % classNumber;
+    classList[targetClassIndex].members.push(student);
+  });
 
   //各地域を分ける.
   //各成績が均等になるように分ける.
   //体力で分ける
+  console.log(classList);
 };
 
 function createClass(n){
