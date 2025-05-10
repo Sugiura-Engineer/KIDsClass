@@ -7,9 +7,9 @@ import "../css/Home.css";
 function Home() {
 
 
-  const [showOverlay,setShowOverlay] = useState(false);
-  const pRef = useRef(null);                        //refを要素につけてターゲットにする.
-  const [showFileDetail,setShowDetail] = useState(false);
+  const [showOverlay,setShowOverlay] = useState(false);   // ファイルドロップのオンオフ.
+  const pRef = useRef(null);                              // refを要素につけてターゲットにする.
+  const [showFileDetail,setShowDetail] = useState(false); // ファイル詳細のオンオフ.
 
   return ( 
     <>

@@ -1,5 +1,7 @@
 import {Overlay} from "react-overlays";
 import React, { useCallback } from "react";
+//@ts-ignore
+import {cleansingCSV} from "../js/cleansingCSV";
 
 //Propsは親コンポネから子コンポネに渡す引数.
 //Propsにtargetとshowを入れてる.このコンポーネントは2つの引数を受け取りますよ.
@@ -24,7 +26,7 @@ export default function FileDropOverlay({target,show, onClose, onFileLoaded}:Pro
     if(file){                                            // ?は、オプショナルチェーン.?の前までが大丈夫(noneやundifined)じゃなければそのあとを実行する.
       console.log("file droped",file);
       //ロードしたらdetailOverlay.
-      cleansingAndDisplay();
+      cleansingAndDisplay(file);
     }                                                    // []は、この関数は一回だけ生成されて、それ以降は同じものを使いまわす、という意味.
   },[]);                                                 // 関数は再レンダリングされるたびに作られる、そのためhandledropでuseEffectを使ってたりしたら、handleDropが変わったとされてしまってuseEffectが発火する.場合によって無くてもいい.
   //ファイルを選択できるようにする関数.
@@ -39,14 +41,16 @@ export default function FileDropOverlay({target,show, onClose, onFileLoaded}:Pro
       if(file){
         console.log("file selected",file);
         //ロードしたらdetailOverlay.
-        cleansingAndDisplay();
+        cleansingAndDisplay(file);
       }
     };
   };
+
   //ファイル選択したら
-  function cleansingAndDisplay(){
+  //@ts-ignore
+  async function cleansingAndDisplay(file){
     //ファイルを渡してクレンジングして.
-    console.log();
+    const cleanedData = await cleansingCSV(file); //返り値があるので変数に入れてあげる.
     //返してもらってDOMいじって表示.
   };
 
