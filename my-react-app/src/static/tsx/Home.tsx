@@ -1,15 +1,19 @@
 //トップページ.
-import {useState,useRef} from "react";
+import {useState} from "react";
 import FileDropOverlay from "./FileDropOverlay";
 import FileDetailOverlay from "./FileDetailOverlay";
 import "../css/Home.css";
 
+
 function Home() {
 
 
-  const [showOverlay,setShowOverlay] = useState(false);   // ファイルドロップのオンオフ.
-  const pRef = useRef(null);                              // refを要素につけてターゲットにする.
-  const [showFileDetail,setShowDetail] = useState(false); // ファイル詳細のオンオフ.
+  const [rawFile,setRawFile] = useState(null);            //元のファイル.
+  const [cleanedFile,setCleandFile] = useState(null);     //きれいにしたデータ.
+
+  const [showOverlay,setShowOverlay] = useState(false);   //ファイルドロップのオンオフ.
+  const [showFileDetail,setShowDetail] = useState(false); //ファイル詳細のオンオフ.
+  
 
   return ( 
     <>
@@ -21,7 +25,6 @@ function Home() {
         <p>クラス分けに速度と安心を</p>
         <img src="./KIDsClass_logo-white.png"></img>
         <div className="click_box"
-          ref={pRef} 
           onClick={() =>{
             setShowOverlay(!showOverlay);
           }}>
@@ -31,10 +34,17 @@ function Home() {
       </div>
     </div>
 
-    <FileDropOverlay target={pRef.current} show={showOverlay} onClose={() => setShowOverlay(false)} onFileLoaded={()=>setShowDetail(true)}/>  {/*画面全体に出るoverlayならrefは使われていないが、形式上書いておく必要がある*/}
+
+    <FileDropOverlay   show={showOverlay}    onClose={() => setShowOverlay(false)}     onFileLoaded={()=>setShowDetail(true)}/>  {/*画面全体に出るoverlayならrefは使われていないが、形式上書いておく必要がある*/}
     <FileDetailOverlay show={showFileDetail} onTwoClose={() => {setShowOverlay(false), setShowDetail(false)}}></FileDetailOverlay>
     </>
   );
 }
 export default Home
+
+
 ///////////////////////
+//Home
+//→FileDropOverlayでFile獲得、"元のFile用"Stateを更新.
+//→FileDetailOverlayでFileを表示、元のFile用StateからFileを取得、それをオブジェクトデータに加工、"きれいにしたデータ用"Stateに保存.
+//

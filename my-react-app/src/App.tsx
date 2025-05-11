@@ -14,3 +14,8 @@ function App() {
 }
 
 export default App
+
+
+//Homeがトップページ.
+//Homeの上でFileDropOverlayを開いてファイルの選択を行い、ファイル情報をStateでHomeに戻す.
+//ファイル情報が入ったらHomeからFileDetailOVerlayを開き、StateからFile情報を入手、cleansingしたデータをStateで保存、表示して確認する.
