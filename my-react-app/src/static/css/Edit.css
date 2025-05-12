@@ -1,46 +1,40 @@
-.edit-container{
+.editHeader{
   width:100%;
-  height:100vh;
+  height:7vh;
+  background-color: white;
+  position:relative;
+  box-shadow: 0px 2px 3px 0px rgb(0, 0, 0,0.1);
+  z-index: 1;
+}
+.headImg{
+  width:13%;
+  position:absolute;
+  left:1%;
+  top:50%;
+  transform:translate(-1%,-50%);
+}
+.editWrapper{
+  width:100%;
+  height:93vh;
   display:flex;
 }
-/*/////////////////////*/
-/*左.*/
-.left-wrapper{
-  width: 60%;
+.leftContainer{
+  width:50%;
   height:100%;
-  background-color: aqua;
   position:relative;
 }
-.left-display{
-  width: 90%;
-  height:90%;
-  background-color: brown;
+.mainDisplay{
+  width:90%;
+  height:95%;
   position:absolute;
-  left:50%;
   top:50%;
-  transform: translate(-50%,-50%);
-
-  
-  white-space: nowrap;
+  left:50%;
+  transform:translate(-50%,-50%);
   overflow-x: scroll;
   overflow-y: scroll;
 }
 
-
-/*/////////////////////*/
-/*右.*/
-.right-wrapper{
-  width: 40%;
+.rightContainer{
+  width:50%;
   height:100%;
-  background-color: aquamarine;
-  position:relative;
-}
-.right-editer{
-  width: 90%;
-  height:90%;
-  background-color: forestgreen;
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform: translate(-50%,-50%);
 }

@@ -12,7 +12,7 @@
 
 
 
-export default async function cleansingCSV(file){ //関数を非同期関数にするよ.
+export async function cleansingCSV(file){ //関数を非同期関数にするよ.
   const reader = new FileReader();
 
   return await new Promise((resolve,reject) => {

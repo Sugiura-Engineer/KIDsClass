@@ -5,19 +5,19 @@
 
 //基本機能用.
 import {Overlay} from "react-overlays";
-import React, { useState,useCallback } from "react";
+import React, { useCallback } from "react";
 
 
 //型定義(いらないけど推奨).
 type Props = {                                                 //Propsは親コンポネから子コンポネに渡す引数.
   show: boolean;                                               //boolean(tru/fal).
   onClose: () => void;                                         //Propsにtargetとshowを入れてる.このコンポーネントは2つの引数を受け取りますよ.
-  onFileLoaded: () => void;                                    //中身を厳格にするために書く.
+  onFileLoaded: (file:File) => void;                                    //中身を厳格にするために書く.
 };
 
 
 //本体.
-export default function FileDropOverlay({show, onClose}:Props){        //親から渡されたProps(bool値とref用HTMLタグ)を持つ.const target= props.targetの簡略構文.引数propsはProps型.
+export default function FileDropOverlay({show, onClose, onFileLoaded}:Props){        //親から渡されたProps(bool値とref用HTMLタグ)を持つ.const target= props.targetの簡略構文.引数propsはProps型.
   
 
   //ファイルをドロップできるようにする関数.
@@ -26,8 +26,8 @@ export default function FileDropOverlay({show, onClose}:Props){        //親か�
     const file = e.dataTransfer.files?.[0];                            // ドロップされたファイルのうち最初の1つを取得.
     if(file){                                                          // ?は、オプショナルチェーン.?の前までが大丈夫(noneやundifined)じゃなければそのあとを実行する.
       console.log("file droped",file);
-      //ロードしたらrawFileのState更新.
-
+      //ロードしたらrawFileのState更新,Dropを閉じてDetailを開く.
+      onFileLoaded(file);
     }                                                                  // []は、この関数は一回だけ生成されて、それ以降は同じものを使いまわす、という意味.
   },[]);                                                               // 関数は再レンダリングされるたびに作られる、そのためhandledropでuseEffectを使ってたりしたら、handleDropが変わったとされてしまってuseEffectが発火する.場合によって無くてもいい.
   //ファイルを選択できるようにする関数.
@@ -41,8 +41,8 @@ export default function FileDropOverlay({show, onClose}:Props){        //親か�
       const file = input.files?.[0];
       if(file){
         console.log("file selected",file);
-        //ロードしたらrawFileのState更新.
-       // setRawFile();
+        //ロードしたらrawFileのState更新,Dropを閉じてDetailを開く.
+        onFileLoaded(file);
       }
     };
   };

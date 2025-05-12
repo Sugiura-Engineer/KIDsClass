@@ -18,7 +18,7 @@
     height:80vh;
     background-image: 
       linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-      url("./classPic.png");
+      url("/KIDsClass//classPic.png");
     background-size: 110%;
     background-position: 100% 25%; 
     position:relative;
