@@ -52,6 +52,7 @@ export function classificationAlgorithm(classNumber,tableData){
   //各成績が均等になるように分ける.
   //体力で分ける
   console.log(classList);
+  return classList;
 };
 
 function createClass(n){
