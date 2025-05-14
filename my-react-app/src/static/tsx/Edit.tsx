@@ -89,7 +89,7 @@ function Edit(){
         <div className="leftContainer">
           <div className="dispayControlButton">
             <div className="buttonContainer">
-              <button className="switchButton">名簿</button>
+              <button className="switchButton" onClick={handleClassSplit}>名簿</button>
               <button className="switchButton">座席</button>
               <button className="switchButton" onClick={handleDisplayStudyGrades}>成績</button>
               <button className="switchButton">地域分布</button>

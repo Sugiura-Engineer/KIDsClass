@@ -16,6 +16,15 @@ function Home() {
   const [showFileDetail,setShowDetail] = useState(false); //ファイル詳細のオンオフ.
   const [showFileSetup,setShowSetup] = useState(false);   //セットアップ用のオンオフ.
 
+
+  const handleCSVDownload = () => {
+    const link = document.createElement("a");        // <a> を作る.<a href="/sample.csv" download>.
+    link.href = "/KIDsClass/児童情報データ100人.csv";  // ダウンロードさせたいファイルのURLを指定.
+    link.download = "児童情報データ100人.csv";         // 保存時のファイル名を指定.
+    link.click();                                    // 擬似的にクリックしてダウンロードを実行.
+  }
+
+
   return ( 
     <>
     <header className="home_header">
@@ -33,6 +42,7 @@ function Home() {
           <img src="/KIDsClass/green-arrow.png"></img>
         </div>
       </div>
+      <div className="csvGenerateButton" onClick={handleCSVDownload}>CSV生成はここ</div>
     </div>
 
 
