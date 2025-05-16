@@ -42,7 +42,7 @@ function Home() {
           <img src="/KIDsClass/green-arrow.png"></img>
         </div>
       </div>
-      <div className="csvGenerateButton" onClick={handleCSVDownload}>CSV生成はここ</div>
+      <div className="csvGenerateButton" onClick={handleCSVDownload}>CSVDLはここ</div>
     </div>
 
 
