@@ -5,7 +5,7 @@
 
 //基本機能用.
 import {Overlay} from "react-overlays";
-import React, { useCallback } from "react";
+import React, {useEffect, useState, useCallback } from "react";
 import "../css/FileDropOverlay.css"
 
 
@@ -20,6 +20,17 @@ type Props = {                                                 //Propsは親コ�
 //本体.
 export default function FileDropOverlay({show, onClose, onFileLoaded}:Props){        //親から渡されたProps(bool値とref用HTMLタグ)を持つ.const target= props.targetの簡略構文.引数propsはProps型.
   
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
+    useEffect(() => {
+    if (show) {
+      requestAnimationFrame(() => {
+        setShouldAnimate(true); // アニメーションフラグをtrueに
+      });
+    } else {
+      setShouldAnimate(false); // falseになったら即非表示に戻す
+    }
+  }, [show]); // ← 第二引数：この値が変わったときだけ実行
 
   //ファイルをドロップできるようにする関数.
   const handleDrop = useCallback((e:React.DragEvent)=>{                // e(イベントのオブジェクト)を、Reactのドラッグイベント型に限定.useCallbackは、関数をメモ化して毎回新しく作られないようにするReactのフック(use○○系のやつ).
@@ -52,7 +63,7 @@ export default function FileDropOverlay({show, onClose, onFileLoaded}:Props){   
   return(
     <Overlay target={() => document.body} show={show} placement="top">
       {({props}) => ( //中身を子要素として渡す.
-        <div  className={`custom-overlay ${show ? "showing" : ""}`}
+        <div  className={`custom-overlay ${shouldAnimate  ? "showing" : ""}`}
           onClick={onClose}
           {...props}
           style={{
@@ -83,7 +94,7 @@ export default function FileDropOverlay({show, onClose, onFileLoaded}:Props){   
                 }}> 
                 <p style={{color:"#389500",marginTop:"17%"}}>ここに .csv .xls .xlsxファイルをドロップ</p>
                 <p style={{color:"#389500"}}>もしくは</p>
-                <p style={{width:"20%",backgroundColor:"#389500",color:"white",margin:"auto",textWrap:"nowrap"}} onClick={handleOpenFolder}>ファイルを選択</p>
+                <p onClick={handleOpenFolder} className="fileSelectP">ファイルを選択</p>
               </div>  
           </div>  
         </div>

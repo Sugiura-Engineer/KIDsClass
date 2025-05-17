@@ -1,9 +1,26 @@
 .custom-overlay {
   opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
+  transition: all 0.3s ease;
+  pointer-events: none; /* 非表示中は操作不可に */
 }
 .custom-overlay.showing {
   opacity: 1;
   pointer-events: auto;
+}
+.fileSelectP{
+  cursor: pointer;
+  width:20%;
+  border: 1px white solid;
+  background-color:#389500;
+  color:white;
+  margin:auto;
+  text-wrap:nowrap;
+  transition: all 0.1s ease;
+}
+.fileSelectP:hover{
+  border: 1px #389500 solid;
+  background-color: white;
+  color:#389500;
+  width:20.5%;
+  font-weight: 700;
 }

@@ -1,5 +1,6 @@
 //トップページ.
 import {useState} from "react";
+import {Link} from "react-router-dom"
 import FileDropOverlay from "./FileDropOverlay";
 import FileDetailOverlay from "./FileDetailOverlay";
 import FileSetupOverlay from "./FileSetupOverlay";
@@ -28,7 +29,10 @@ function Home() {
   return ( 
     <>
     <header className="home_header">
-      <img src="/KIDsClass/KIDsClass_logo.png"></img>
+      <Link to="/KIDsClass/"><img className="aHeaderLogoimg" src="/KIDsClass/KIDsClass_logo.png"></img></Link>
+      <div className="aHeaderLinks">
+        <Link to="/KIDsClass/" style={{textDecoration:"none",color:'#389500'}}><div className="aHeaderLink">ホーム</div></Link>
+      </div>
     </header>
 
     <div className="a_box">
