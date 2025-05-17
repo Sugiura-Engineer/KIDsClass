@@ -6,6 +6,7 @@
 //基本機能用.
 import {Overlay} from "react-overlays";
 import React, { useCallback } from "react";
+import "../css/FileDropOverlay.css"
 
 
 //型定義(いらないけど推奨).
@@ -51,7 +52,8 @@ export default function FileDropOverlay({show, onClose, onFileLoaded}:Props){   
   return(
     <Overlay target={() => document.body} show={show} placement="top">
       {({props}) => ( //中身を子要素として渡す.
-        <div onClick={onClose}
+        <div  className={`custom-overlay ${show ? "showing" : ""}`}
+          onClick={onClose}
           {...props}
           style={{
             backgroundColor:"rgba(0,0,0,0.5)",

@@ -30,6 +30,7 @@ function Home() {
     <header className="home_header">
       <img src="/KIDsClass/KIDsClass_logo.png"></img>
     </header>
+
     <div className="a_box">
       <div className="home_center">
         <p>クラス分けに速度と安心を</p>
@@ -44,6 +45,8 @@ function Home() {
       </div>
       <div className="csvGenerateButton" onClick={handleCSVDownload}>CSVDLはここ</div>
     </div>
+
+    
 
 
     <FileDropOverlay   show={showOverlay}    onClose={() => setShowOverlay(false)}  onFileLoaded={(file)=>{setRawFile(file),setShowOverlay(false),setShowDetail(true)}}/>  {/*ここに書いた中身はそのまま実行される.*/}

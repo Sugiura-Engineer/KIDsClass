@@ -1,0 +1,9 @@
+.custom-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.custom-overlay.showing {
+  opacity: 1;
+  pointer-events: auto;
+}

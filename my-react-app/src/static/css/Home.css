@@ -96,3 +96,18 @@
     top:50%;
     transform:translate(-2%,-50%);
   }
+  .click_box:hover {
+    background-color: #389500;
+    border: 3px white solid;
+    width:61%;
+    height:19%;
+  }
+  .click_box:hover > p {
+    color: white;
+  }
+  .click_box:hover > img {
+    content:url("/KIDsClass/white-arrow.png");
+  }
+  .click_box, .click_box > p, .click_box > img{
+    transition:all 1.3s ease;
+  }
