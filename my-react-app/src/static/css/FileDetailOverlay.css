@@ -1,0 +1,93 @@
+.detail-Overlay{
+  opacity: 1;
+  transition:all 1.5s ease;
+  pointer-events: none; /* 非表示中は操作不可に */
+
+  margin-top:20vh;
+  width:50vw;
+  height:60vh;
+}
+.detail-Overlay.detail-Showing{
+  pointer-events: auto;
+
+  margin-top:10vh;
+  width:70vw;
+  height:80vh;
+}
+
+table{
+  border-collapse:collapse;
+  width:120%;
+}
+th{
+  background-color: #389500;
+  color:white;
+}
+th{
+  border-top:1px #389500 solid;
+  border-bottom:1px #389500 solid;
+}
+tr{
+  border-top:1px #57c512 solid;
+  border-bottom:1px #57c512 solid;
+}
+td:first-child {
+  background-color: #57c512;
+    border-top:1px #57c512 solid;
+  border-bottom:1px #57c512 solid;
+  color:white;
+  font-weight: bold;
+}
+td{
+  background-color: white;
+  color:#245d00;
+}
+
+.detailCancel{
+  width: 60%;
+  height:95%;
+  text-wrap: nowrap;
+  transition: all 0.3s ease;
+}
+.cancelArrow{
+  width:3%;
+  transition: all 0.3s ease;
+}
+.cancelText{
+  width:30%;
+  transition: all 0.3s ease;
+}
+.detailCancel:hover{
+  width: 59%;
+}
+.detailCancel:hover .cancelArrow{
+  width:8%
+}
+.detailCancel:hover .cancelText{
+  width:45%
+}
+
+
+.detailNext{
+  width:60%;
+  height:95%;
+  text-wrap: nowrap;
+  transition: all 0.3s ease;
+}
+.nextArrow{
+  width:3%;
+  transition: all 0.3s ease;
+}
+.nextText{
+  width:40%;
+  transition: all 0.3s ease;
+}
+.detailNext:hover{
+  width: 59%;
+}
+.detailNext:hover .nextArrow{
+  width:8%
+}
+.detailNext:hover .nextText{
+  width:60%
+}

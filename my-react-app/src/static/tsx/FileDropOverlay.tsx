@@ -6,6 +6,7 @@
 //基本機能用.
 import {Overlay} from "react-overlays";
 import React, {useEffect, useState, useCallback } from "react";
+import { FadeLoader } from "react-spinners";
 import "../css/FileDropOverlay.css"
 
 
@@ -21,8 +22,7 @@ type Props = {                                                 //Propsは親コ�
 export default function FileDropOverlay({show, onClose, onFileLoaded}:Props){        //親から渡されたProps(bool値とref用HTMLタグ)を持つ.const target= props.targetの簡略構文.引数propsはProps型.
   
   const [shouldAnimate, setShouldAnimate] = useState(false);
-
-    useEffect(() => {
+  useEffect(() => {
     if (show) {
       requestAnimationFrame(() => {
         setShouldAnimate(true); // アニメーションフラグをtrueに
@@ -32,14 +32,22 @@ export default function FileDropOverlay({show, onClose, onFileLoaded}:Props){   
     }
   }, [show]); // ← 第二引数：この値が変わったときだけ実行
 
+  const [showRoading, setShowRoading] = useState(false);
+
   //ファイルをドロップできるようにする関数.
   const handleDrop = useCallback((e:React.DragEvent)=>{                // e(イベントのオブジェクト)を、Reactのドラッグイベント型に限定.useCallbackは、関数をメモ化して毎回新しく作られないようにするReactのフック(use○○系のやつ).
     e.preventDefault();                                                // ブラウザにファイルを落とすと開いちゃうのを防ぐ.eの中のdataTranserの中のfilesの中にファイルがある.
     const file = e.dataTransfer.files?.[0];                            // ドロップされたファイルのうち最初の1つを取得.
     if(file){                                                          // ?は、オプショナルチェーン.?の前までが大丈夫(noneやundifined)じゃなければそのあとを実行する.
       console.log("file droped",file);
+      setShowRoading(true);
       //ロードしたらrawFileのState更新,Dropを閉じてDetailを開く.
-      onFileLoaded(file);
+      setTimeout(()=>{
+        onFileLoaded(file);
+      },1500);
+      setTimeout(()=>{
+        setShowRoading(false);
+      },1500);
     }                                                                  // []は、この関数は一回だけ生成されて、それ以降は同じものを使いまわす、という意味.
   },[]);                                                               // 関数は再レンダリングされるたびに作られる、そのためhandledropでuseEffectを使ってたりしたら、handleDropが変わったとされてしまってuseEffectが発火する.場合によって無くてもいい.
   //ファイルを選択できるようにする関数.
@@ -53,8 +61,14 @@ export default function FileDropOverlay({show, onClose, onFileLoaded}:Props){   
       const file = input.files?.[0];
       if(file){
         console.log("file selected",file);
+        setShowRoading(true);
         //ロードしたらrawFileのState更新,Dropを閉じてDetailを開く.
-        onFileLoaded(file);
+        setTimeout(()=>{
+          onFileLoaded(file);
+        },1500);
+        setTimeout(()=>{
+          setShowRoading(false);
+      },1500);
       }
     };
   };
@@ -95,6 +109,11 @@ export default function FileDropOverlay({show, onClose, onFileLoaded}:Props){   
                 <p style={{color:"#389500",marginTop:"17%"}}>ここに .csv .xls .xlsxファイルをドロップ</p>
                 <p style={{color:"#389500"}}>もしくは</p>
                 <p onClick={handleOpenFolder} className="fileSelectP">ファイルを選択</p>
+                <div className={`roadingSpinerContainer ${showRoading ? "roadingShowing":""}`} style={{width:"70%",height:"70%",backgroundColor:"white",position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)"}}>
+                  <div style={{width:"100%",height:"100%",position:"relative"}}>
+                    <FadeLoader color="#389500" speedMultiplier={0.8} cssOverride={{position: "absolute",top:"61%",left:"56%",transform:"translate(-56%, -61%)"}}/>
+                  </div>
+                </div>  
               </div>  
           </div>  
         </div>

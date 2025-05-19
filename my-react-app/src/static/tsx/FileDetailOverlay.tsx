@@ -1,10 +1,12 @@
 import {Overlay} from "react-overlays";
-import {useEffect,useRef} from "react";
+import {useState,useEffect,useRef} from "react";
 import {useNavigate} from "react-router-dom";
 //@ts-ignore
 import {cleansingCSV} from "../js/cleansingCSV"
 //@ts-ignore
 import {csvDisplay} from "../js/csvDisplay"
+import "../css/FileDetailOverlay.css"
+
 
 
 type DataRow = {
@@ -23,7 +25,18 @@ type Props = {                                  //中身をHTMLElement限定に.
 //ファイルが得られたらファイルの詳細を表示する.
 export default function FileDetailOverlay({show,onClose,rawFile,setCleansingData,cleanedData}:Props){
   
-  
+  const [showDetailOverlay,setShowDetailOverlay] = useState(false);
+  useEffect(() => {
+    if(show){
+      requestAnimationFrame(() => {
+        setShowDetailOverlay(true);
+      })
+      }else{
+        setShowDetailOverlay(false);
+      }
+    },[show])
+
+
   //Fileを取得、データのクレンジングを行うのを待ってから、表示する関数.
   const handleDetailDisplay = async(
     rawFile:File|null,
@@ -64,6 +77,7 @@ export default function FileDetailOverlay({show,onClose,rawFile,setCleansingData
   };
 
 
+
   return(
     <Overlay target={()=>document.body} show={show} placement="top">
       {({props}) => 
@@ -76,16 +90,29 @@ export default function FileDetailOverlay({show,onClose,rawFile,setCleansingData
             zIndex:"999",
         }}
         >
-          <div onClick={(e) => e.stopPropagation()}
+          <div className={`detail-Overlay ${showDetailOverlay ? "detail-Showing": ""}`}
+            onClick={(e) => e.stopPropagation()}
             style={{
-              backgroundColor:"white",
-              width:"70vw",height:"80vh",
-              margin:"auto",marginTop:"10vh",
+              backgroundColor:"white",marginRight:"auto",marginLeft:"auto",
               display:"flex",flexDirection: "column",textAlign:"center"}}>
+              <div style={{color:"#389500",height:"5vh",display:"flex",justifyContent:"center",alignItems:"center",marginTop:"1vh",}}>
+                <span style={{fontSize:"110%",fontWeight:"500"}}>このデータを使用しますか？：</span>
+                <span style={{fontSize:"120%",fontWeight:"500",textDecoration:"underline"}}>{rawFile?.name}</span>
+              </div>
               <div className="detailDisp" style={{width:"95%",height:"75%",margin:"auto",border:"2px #389500 solid",overflowX:"scroll",overflowY:"scroll"}}></div>
-              <div style={{width:"100%",height:"10%",justifyContent:"center",display:"flex",gap:"10%",marginBottom:"1.5%"}}>
-                <div style={{width:"30%",border:"2px #389500 solid",backgroundColor:"white",color:"#389500",borderRadius:"50px",display:"flex",justifyContent:"center",alignItems:"center"}} onClick={onClose}><p>キャンセル</p></div>
-                <div onClick={handleTransision} style={{width:"30%",border:"2px #389500 solid",backgroundColor:"#389500",color:"white",borderRadius:"50px",display:"flex",justifyContent:"center",alignItems:"center"}}>このデータを使う</div>
+              <div style={{width:"100%",height:"10%",justifyContent:"center",display:"flex",marginBottom:"1.5%"}}>
+                <div style={{width:"50%",position:"relative"}}>
+                  <div className="detailCancel" onClick={onClose} style={{border:"2px #389500 solid",backgroundColor:"white",color:"#389500",borderRadius:"50px",display:"flex",justifyContent:"center",alignItems:"center",cursor:"pointer",position:"absolute",right:"10%",}}>
+                    <span className="cancelArrow">←</span>
+                    <span className="cancelText">キャンセル</span>
+                  </div>
+                </div>
+                <div style={{width:"50%",position:"relative"}}>
+                  <div className="detailNext" onClick={handleTransision} style={{border:"2px #389500 solid",backgroundColor:"#389500",color:"white",borderRadius:"50px",display:"flex",justifyContent:"center",alignItems:"center",cursor:"pointer",position:"absolute",left:"10%", }}>
+                    <span className="nextText">このデータを使う</span>
+                    <span className="nextArrow">→</span>
+                  </div>
+                </div>
               </div> 
           </div>
         </div>  
