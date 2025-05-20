@@ -15,6 +15,12 @@
   height:80vh;
 }
 
+.detailDisp{
+  scrollbar-color: #245d00 white;
+  scrollbar-width: thin;
+}
+
+
 table{
   border-collapse:collapse;
   width:120%;

@@ -7,6 +7,8 @@ import {cleansingCSV} from "../js/cleansingCSV"
 import {csvDisplay} from "../js/csvDisplay"
 import "../css/FileDetailOverlay.css"
 
+import PageTransition from "../component/PageTransition";
+
 
 
 type DataRow = {
@@ -60,8 +62,13 @@ export default function FileDetailOverlay({show,onClose,rawFile,setCleansingData
       handleDetailDisplay(rawFile,setCleansingData);
     }
   },[show,rawFile]);
+
+
   //Edit遷移用(Refは最新の値を一時的に覚えておくことができる).
   const cleanedDataRef = useRef<DataRow[] | null>(null);
+  //ページ遷移用.
+  const [showTransition,setShowTransition] = useState(false);
+
   useEffect(()=>{
     cleanedDataRef.current = cleanedData;
   },[cleanedData]);
@@ -71,9 +78,12 @@ export default function FileDetailOverlay({show,onClose,rawFile,setCleansingData
       alert("クレンジングデータ無し");
       return;
     }
-    navigate("/KIDsClass/Edit/",{
-      state:{cleanedData:cleanedDataRef.current}
-    });
+    setShowTransition(true);
+    setTimeout(()=>{
+      navigate("/KIDsClass/Edit/",{
+        state:{cleanedData:cleanedDataRef.current,rawFile}
+      });
+    },500);
   };
 
 
@@ -96,7 +106,7 @@ export default function FileDetailOverlay({show,onClose,rawFile,setCleansingData
               backgroundColor:"white",marginRight:"auto",marginLeft:"auto",
               display:"flex",flexDirection: "column",textAlign:"center"}}>
               <div style={{color:"#389500",height:"5vh",display:"flex",justifyContent:"center",alignItems:"center",marginTop:"1vh",}}>
-                <span style={{fontSize:"110%",fontWeight:"500"}}>このデータを使用しますか？：</span>
+                <span style={{fontSize:"100%",fontWeight:"500"}}>このデータを使用しますか？：</span>
                 <span style={{fontSize:"120%",fontWeight:"500",textDecoration:"underline"}}>{rawFile?.name}</span>
               </div>
               <div className="detailDisp" style={{width:"95%",height:"75%",margin:"auto",border:"2px #389500 solid",overflowX:"scroll",overflowY:"scroll"}}></div>
@@ -115,6 +125,7 @@ export default function FileDetailOverlay({show,onClose,rawFile,setCleansingData
                 </div>
               </div> 
           </div>
+          <PageTransition isActive={showTransition}></PageTransition>
         </div>  
       }
     </Overlay>
