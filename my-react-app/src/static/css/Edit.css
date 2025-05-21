@@ -1,71 +1,31 @@
 .editHeader{
   width:100%;
-  height:7vh;
+  height:4vh;
   background-color: white;
   position:relative;
-  box-shadow: 0px 2px 3px 0px rgb(0, 0, 0,0.1);
   z-index: 1;
 }
 .headImg{
-  width:13%;
+  height:60%;
   position:absolute;
   left:1%;
   top:50%;
   transform:translate(-1%,-50%);
 }
 
-.editWrapper{
+.edit-content-container{
   width:100%;
-  height:93vh;
-  display:flex;
-}
-.leftContainer{
-  width:80%;
-  height:100%;
-  display:flex;
-}
-.dispayControlButton{
-  width:20%;
-  height:100%;
-  position: relative;
-}
-.buttonContainer{
-  width:30%;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top:50%;
-  right:15%;
-  transform: translateY(-50%);
-}
-.switchButton{
-  width:100%;
-  aspect-ratio: 1/1;
-  margin:5%;
-  background-color: white;
-  border: 0px;
-  border-radius: 100%;
-  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.4);
-}
-.mainContainer{
-  width:80%;
-  height:100%;
-}
-.displayHeader{
-  width:100%;
-  height:10%;
-  color:white;
-  background-color: #48bc00;
-}
-.mainDisplay{
-  width:100%;
-  height:90%;
-  overflow-x: scroll;
-  overflow-y: scroll;
-  white-space: nowrap;
-}
+  height:92.5vh;
+  margin:0;
 
-.rightContainer{
-  width:20%;
-  height:100%;
+  display: flex;
+}
+.edit-content-container > :first-child{
+  width:10vw;
+}
+.edit-content-container > :nth-child(2){
+  width:75vw;
+}
+.edit-content-container > :nth-child(3){
+  width:15vw;
 }

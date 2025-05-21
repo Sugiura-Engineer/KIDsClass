@@ -1,4 +1,5 @@
 //コンポーネントをとる.
+import EditLeftDiv from "./editcomponent/EditLeftDiv.js";
 import EditCenterDiv from "./editcomponent/EditCenterDiv.js";
 
 
@@ -16,7 +17,7 @@ import {useLocation,Link} from "react-router-dom";
 
 function Edit(){
   const location = useLocation();
-  const [forEditData, setForEditData] = useState([]);
+  const [forEditData, setForEditData] = useState(location.state.cleanedData);
   const [rawFile,setRawFile] = useState(location.state.rawFile);
 
   //@ts-ignore
@@ -35,16 +36,15 @@ function Edit(){
       <header className="editHeader">
         <Link to={"/KIDsClass"}><img  className="headImg" src="/KIDsClass//KIDsClass_logo.png"></img></Link>
       </header>
+      <p style={{margin:"0",backgroundColor:"#389500",color:"white",display:"flex",alignItems:"center",justifyContent:"center",height:"3.5vh",fontSize:"90%"}}>{rawFile?.name}</p>
       
-      <EditCenterDiv rawFile={rawFile}/>
+      <div className="edit-content-container">
+        <EditLeftDiv/>
+        <EditCenterDiv rawFile={rawFile} forEditData={forEditData}/>
 
-        <div className="rightContainer">
-          <div className="classNumberBox">
-            クラス数：
-            <input type="number" id="splitClassNumber"></input>
-          </div>
-          <button>クラス分けをする</button>
-        </div>
+      </div>
+
+      
     </>
   )
 }
