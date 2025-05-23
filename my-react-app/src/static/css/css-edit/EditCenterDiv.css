@@ -6,15 +6,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height:5%;
+  height:10%;
+
+  font-size: 120%;
+  font-weight: 500;
+  color:#389500;
 }
 .center-Display{
-  height: 95%;
+  height: 89%;
 
   overflow-y: auto;
   overflow-x: auto;
   scrollbar-color: #245d00 white;
   scrollbar-width: thin;
+
+  text-align: center;
 }
 
 table{

@@ -1,0 +1,29 @@
+.left-Container{
+  width:100%;
+  height:100%;
+  position:relative;
+}
+.left-ControlPanel{
+  position:absolute;
+  top:50%;
+  right:10%;
+  transform:translateY(-50%);
+
+  display: flex;
+  flex-direction: column;
+}
+.circle-Button{
+  width:4vw;
+  aspect-ratio: 1/1;
+  margin:1vh;
+  
+  border-radius: 100%;
+  border:1px #389500 solid;
+  color: white;
+  background-color: #389500;
+
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size:90%;
+}
